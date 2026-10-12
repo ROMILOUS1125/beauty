@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mua～</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  min-height:100vh;
+  background:#f8f0f2;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+.img-box{
+  z-index:2;
+}
+img{
+  max-width:80vw;
+  max-height:70vh;
+  border-radius:12px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.15);
+}
+.text{
+  font-size:42px;
+  color:#c84b78;
+  margin-top:20px;
+  font-weight:bold;
+  z-index:2;
+}
+.fall-item{
+  position:absolute;
+  font-size:28px;
+  pointer-events:none;
+  animation:fall linear forwards;
+  z-index:1;
+}
+@keyframes fall{
+  0%{
+    top:-50px;
+    opacity:1;
+    transform:rotate(0deg);
+  }
+  100%{
+    top:100vh;
+    opacity:0;
+    transform:rotate(360deg);
+  }
+}
+</style>
+</head>
+<body>
+<div class="img-box">
+<!-- 把图片替换成你这张图，部署前将图片上传，填入图片地址 -->
+<img src="你的图片链接" alt="pic">
+</div>
+<div class="text">mua～</div>
+
+<script>
+// 生成爱心和嘴唇飘落
+function createFall(){
+  const arr = ['❤','👄'];
+  const el = document.createElement('div');
+  el.className = 'fall-item';
+  el.innerText = arr[Math.floor(Math.random()*arr.length)];
+  // 随机横向位置
+  el.style.left = Math.random()*100 + 'vw';
+  // 随机下落时长
+  const time = 4 + Math.random()*6;
+  el.style.animationDuration = time + 's';
+  document.body.appendChild(el);
+  // 动画结束移除元素
+  setTimeout(()=>el.remove(),time*1000);
+}
+// 每隔200ms生成一个
+setInterval(createFall,200);
+</script>
+</body>
+</html>
